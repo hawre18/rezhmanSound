@@ -12,7 +12,7 @@ class SlideController extends Controller
      */
     public function index()
     {
-        //
+        return view('v1.index.admin.slider.add');
     }
 
     /**
