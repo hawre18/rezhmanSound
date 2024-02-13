@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SlideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,9 @@ Route::prefix('admin')->group(function (){
    Route::get('/dashboard',[AdminController::class,'Dashboard'])->name('admin.dashboard')->middleware('admin');
     Route::post('logout', [LoginController::class, 'Logout'])->name('admin-logout');
     Route::post('/register/owner', [RegisterController::class, 'Registertion'])->name('registertion');
+
     Route::get('/categories',[CategoryController::class,'Create'])->name('category-form');
     Route::post('categories/index',[CategoryController::class,'Store'])->name('category-uniform');
-
 });
 Route::get('/', function () {
     return view('welcome');

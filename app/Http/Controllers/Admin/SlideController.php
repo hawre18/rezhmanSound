@@ -12,7 +12,8 @@ class SlideController extends Controller
      */
     public function index()
     {
-        //
+        return view('v1.index.admin.slider.edit');
+
     }
 
     /**
@@ -28,7 +29,6 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -44,7 +44,7 @@ class SlideController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
