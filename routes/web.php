@@ -25,8 +25,9 @@ Route::prefix('admin')->group(function (){
    Route::get('/dashboard',[AdminController::class,'Dashboard'])->name('admin.dashboard')->middleware('admin');
     Route::post('logout', [LoginController::class, 'Logout'])->name('admin-logout');
     Route::post('/register/owner', [RegisterController::class, 'Registertion'])->name('registertion');
-    Route::get('/addcategory',[CategoryController::class,'index']);
-    Route::get('/addslide',[SlideController::class,'index']);
+
+    Route::get('/categories',[CategoryController::class,'Create'])->name('category-form');
+    Route::post('categories/index',[CategoryController::class,'Store'])->name('category-uniform');
 });
 Route::get('/', function () {
     return view('welcome');
