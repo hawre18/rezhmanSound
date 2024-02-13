@@ -27,6 +27,8 @@ Route::prefix('admin')->group(function (){
     Route::post('/register/owner', [RegisterController::class, 'Registertion'])->name('registertion');
     Route::get('/addcategory',[CategoryController::class,'index']);
     Route::get('/addslide',[SlideController::class,'index']);
+    Route::get('/category/edit/{id}',[CategoryController::class,'edit'])->name('category-form');
+    Route::Patch('/category/update/{id}',[CategoryController::class,'update'])->name('categories-uniform');
 });
 Route::get('/', function () {
     return view('welcome');
