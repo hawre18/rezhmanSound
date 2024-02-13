@@ -27,6 +27,10 @@ Route::prefix('admin')->group(function (){
     Route::post('/register/owner', [RegisterController::class, 'Registertion'])->name('registertion');
     Route::get('/addcategory',[CategoryController::class,'index']);
     Route::get('/addslide',[SlideController::class,'index']);
+
+    Route::get('/password/forgot',[LoginController::class,'showForgotForm'])->name('forgot-password-form');
+    Route::get('/password/reset/{token}',[LoginController::class,'showResetForm'])->name('reset-password-form');
+    Route::post('/link/reset',[LoginController::class,'sendLink'])->name('send-link-reset');
 });
 Route::get('/', function () {
     return view('welcome');

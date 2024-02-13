@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Psy\Util\Str;
 
 class LoginController extends Controller
 {
@@ -35,4 +39,32 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+
+    public function showForgotForm()
+    {
+        return view('v1.index.admin.auth.forgot-password');
+    }
+
+    public function sendLink(Request $request)
+    {
+        $request->validate([
+           'email'=>'required|email|exists:admins,email'
+        ]);
+        $token=\Illuminate\Support\Str::random(64);
+        DB::table('password_resets')->insert([
+            'email'=>$request->email,
+        'token'=>$token,
+        'created_at'=>Carbon::now(),
+        ]);
+        $action_link=route('reset-password-form',['token'=>$token,'email'=>$request->email]);
+        $body="this is a test";
+        Mail::send('v1.index.admin.auth.reset-password',['action_link'=>$action_link,'body'=>$body],function ($message)use($request){
+           $message->from('test@example.com','your app');
+           $message->to($request->email,'yourname')->subject('reset password');
+        });
+        return back()->with('message','success');
+
+    }
+
+
 }
