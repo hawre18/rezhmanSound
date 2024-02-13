@@ -17,12 +17,11 @@
                 </ul>
             </div>
         @endif
-        <form action="{{url('admin/categories/index')}}" method="post">
+        <form action="{{url('admin/categories/store')}}" method="post">
             @csrf
             <p style="margin-right: 8%;"> <span>*</span> عنوان دسته بندی</p>
-            <p style="margin-right: 33%;"> <span>*</span> دسته بندی والد</p><br>
             <input class="nameCategory" type="text" placeholder="فارسی" name="name" id="name">
-
+            <p style="margin-right: 33%;"> <span>*</span> دسته بندی والد</p><br>
             <select class="selectAddCategory" name="parent_id" id="parent_id">
                 <option value="" selected disabled> انتخاب کنید</option>
                 @foreach($categories as $row)

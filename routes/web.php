@@ -19,27 +19,26 @@ use App\Http\Controllers\Admin\SlideController;
 |
 */
 Route::prefix('admin')->group(function (){
-   Route::get('/login',[LoginController::class,'Index'])->name('login-form');
-   Route::get('/register',[RegisterController::class,'Register'])->name('register-form');
-   Route::post('/login/owner',[LoginController::class,'Login'])->name('admin.login');
-   Route::get('/dashboard',[AdminController::class,'Dashboard'])->name('admin.dashboard')->middleware('admin');
+    Route::get('/login',[LoginController::class,'Index'])->name('login-form');
+    Route::get('/register',[RegisterController::class,'Register'])->name('register-form');
+    Route::post('/login/owner',[LoginController::class,'Login'])->name('admin.login');
+    Route::get('/dashboard',[AdminController::class,'Dashboard'])->name('admin.dashboard')->middleware('admin');
     Route::post('logout', [LoginController::class, 'Logout'])->name('admin-logout');
     Route::post('/register/owner', [RegisterController::class, 'Registertion'])->name('registertion');
 
-    Route::get('/addcategory',[CategoryController::class,'index']);
-    Route::get('/addslide',[SlideController::class,'index']);
+    Route::get('/categories/add',[CategoryController::class,'create'])->name('add.category');
+    Route::post('/categories/store',[CategoryController::class,'store'])->name('store.category');
+    Route::get('/categories/{id}/edit',[CategoryController::class,'edit'])->name('edit.category');
+    Route::Patch('/categories/update/{id}',[CategoryController::class,'update'])->name('update.category');
+    Route::get('/categories/index',[CategoryController::class,'index'])->name('index.category');
 
 
     Route::get('/password/forgot',[LoginController::class,'showForgotForm'])->name('forgot-password-form');
     Route::get('/password/reset/{token}',[LoginController::class,'showResetForm'])->name('reset-password-form');
     Route::post('/link/reset',[LoginController::class,'sendLink'])->name('send-link-reset');
 
-    Route::get('/category/edit/{id}',[CategoryController::class,'edit'])->name('category-form');
-    Route::Patch('/category/update/{id}',[CategoryController::class,'update'])->name('categories-uniform');
 
 
-    Route::get('/categories',[CategoryController::class,'Create'])->name('category-form');
-    Route::post('categories/index',[CategoryController::class,'Store'])->name('category-uniform');
 
 });
 Route::get('/', function () {

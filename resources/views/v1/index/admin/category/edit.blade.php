@@ -17,17 +17,15 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{route('categories-uniform' ,$category->id)}}" method="post">
+            <form action="{{route('update.category',$category->id)}}" method="post">
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
                 <p style="margin-right: 8%;"> <span>*</span> عنوان دسته بندی</p>
                 <p style="margin-right: 33%;"> <span>*</span> دسته بندی والد</p><br>
-                <input class="nameCategory" type="text" placeholder="فارسی" name="name" id="name">
-
+                <input class="nameCategory" type="text" placeholder="فارسی" name="name" id="name" value="{{$category->name}}">
                 <select class="selectAddCategory" name="parent_id" id="parent_id">
                     <option value="" selected disabled> انتخاب کنید</option>
-                    <option value=""></option>
-                    @foreach($category as $row)
+                    @foreach($categories as $row)
                         <option value="{{$row->id}}">{{$row->name}}</option>
                     @endforeach
                 </select>

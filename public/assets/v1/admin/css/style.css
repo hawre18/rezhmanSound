@@ -452,6 +452,25 @@ a{
     margin: 0 auto;
     display: block;
     cursor: pointer
+}
+.tableListCategory{
+    border: 1px solid rgb(252, 251, 251);
+    text-align: right;
+    padding: 5px;
+    padding-right: 10px;
+}
+.thListCategory {
+    border: 1px solid rgb(252, 251, 251);
+    text-align: right;
+    padding: 5px;
+    padding-right: 10px;
+    display: table-cell;
+    font-weight: bold;
 
+}
+table {
+    width: 100%;
+    border-spacing: 0px;
+    background-color: white;
 
 }
