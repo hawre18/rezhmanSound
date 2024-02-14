@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slide extends Model
 {
-    use HasFactory;
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
 }

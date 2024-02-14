@@ -32,6 +32,9 @@ Route::prefix('admin')->group(function (){
     Route::Patch('/categories/update/{id}',[CategoryController::class,'update'])->name('update.category');
     Route::get('/categories/index',[CategoryController::class,'index'])->name('index.category');
 
+    Route::get('/slides/index',[SlideController::class,'index'])->name('index.slide');
+    Route::post('/slides/{id}/destroy',[SlideController::class,'destroy'])->name('delete.slide');
+
 
     Route::get('/password/forgot',[LoginController::class,'showForgotForm'])->name('forgot-password-form');
     Route::get('/password/reset/{token}',[LoginController::class,'showResetForm'])->name('reset-password-form');
