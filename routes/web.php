@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\Auth\ForgotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,11 @@ Route::prefix('admin')->group(function (){
     Route::post('/register/owner', [RegisterController::class, 'Registertion'])->name('registertion');
     Route::get('/addcategory',[CategoryController::class,'index']);
     Route::get('/addslide',[SlideController::class,'index']);
+    Route::get('/password/forgot',[ForgotController::class,'showForgotForm'])->name('forgot-password-form');
+    Route::post('/password/verify',[ForgotController::class,'sendMail'])->name('send-mail');
+    Route::post('/login/form',[ForgotController::class,'verifyCode'])->name('verify-code');
+   
+
 });
 Route::get('/', function () {
     return view('welcome');
