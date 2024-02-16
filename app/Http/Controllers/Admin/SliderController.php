@@ -3,20 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
 
-class CategoryController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('v1.index.admin.category.add');
+        return view('v1.index.admin.slider.edit');
+
     }
 
     /**
@@ -24,9 +25,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        if(View::exists('v1.index.admin.category.add')){
-            $categories=Category::all();
-            return view('v1.index.admin.category.add',compact(['categories']));
+        if(View::exists('v1.index.admin.slider.add')){
+            $sliders=Slider::all();
+            return view('v1.index.admin.slider.add',compact(['sliders']));
         }else{
             abort(Response::HTTP_NOT_FOUND);
         }
@@ -38,20 +39,21 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-            'name'=>'required|min:3|max:100|regex:/^[ آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئ\s]+$/',
-            'parent_id'=>'nameric'
+            'title'=>'required|min:3|max:100|regex:/^[ آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئ\s]+$/'
         ]);
         try{
-            $category=new Category();
-            $category->name=$request->input('name');
-            $category->parent_id=$request->input('parent_id');
-            $category->admin_id=1;
-            $category->save();
-            Session::flash('category_success','عملیات موفقیت آمیز بود');
-            return redirect('admin/categories');
+            $slider=new Slider();
+            $slider->title=$request->input('title');
+            $slider->body=$request->input('body');
+            $slider->links=$request->input('links');
+            $slider->image_id=1;
+            $slider->admin_id=1;
+            $slider->save();
+            Session::flash('slider_success','عملیات موفقیت آمیز بود');
+            return redirect('admin/sliders');
         }catch (\Exception $er){
-            Session::flash('category_error','خطا در انجام عملیات');
-            return redirect('admin/categories');
+            Session::flash('slider_error','خطا در انجام عملیات');
+            return redirect('admin/sliders');
         }
     }
 
@@ -68,7 +70,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**

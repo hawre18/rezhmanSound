@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +28,8 @@ Route::prefix('admin')->group(function (){
 
     Route::get('/categories',[CategoryController::class,'Create'])->name('category-form');
     Route::post('categories/index',[CategoryController::class,'Store'])->name('category-uniform');
+    Route::get('/sliders',[SliderController::class,'Create'])->name('slider-form');
+    Route::post('sliders/index',[SliderController::class,'Store'])->name('slider-uniform');
 });
 Route::get('/', function () {
     return view('welcome');
