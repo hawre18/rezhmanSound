@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class SlideController extends Controller
 {
@@ -12,7 +16,13 @@ class SlideController extends Controller
      */
     public function index()
     {
-        return view('v1.index.admin.slider.add');
+        if(View::exists('v1.index.admin.slider.list')){
+            $slides=Slide::with('image')->paginate(10);
+            return view('v1.index.admin.slider.list',compact(['slides']));
+        }else{
+            abort(Response::HTTP_NOT_FOUND);
+        }
+
     }
 
     /**
@@ -28,7 +38,6 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -44,7 +53,7 @@ class SlideController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
@@ -60,6 +69,14 @@ class SlideController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try{
+            $slide=Slide::findorfail($id);
+            $slide->delete();
+            Session::flash('slide_success','عملیات موفقیت آمیز بود');
+            return redirect('admin/slides');
+        }catch (\Exception $er){
+            Session::flash('slide_error','خطا در انجام عملیات');
+            return redirect('admin/slides');
+        }
     }
 }

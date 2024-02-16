@@ -20,18 +20,29 @@ use App\Http\Controllers\Admin\Auth\ForgotController;
 |
 */
 Route::prefix('admin')->group(function (){
-   Route::get('/login',[LoginController::class,'Index'])->name('login-form');
-   Route::get('/register',[RegisterController::class,'Register'])->name('register-form');
-   Route::post('/login/owner',[LoginController::class,'Login'])->name('admin.login');
-   Route::get('/dashboard',[AdminController::class,'Dashboard'])->name('admin.dashboard')->middleware('admin');
+    Route::get('/login',[LoginController::class,'Index'])->name('login-form');
+    Route::get('/register',[RegisterController::class,'Register'])->name('register-form');
+    Route::post('/login/owner',[LoginController::class,'Login'])->name('admin.login');
+    Route::get('/dashboard',[AdminController::class,'Dashboard'])->name('admin.dashboard')->middleware('admin');
     Route::post('logout', [LoginController::class, 'Logout'])->name('admin-logout');
     Route::post('/register/owner', [RegisterController::class, 'Registertion'])->name('registertion');
-    Route::get('/addcategory',[CategoryController::class,'index']);
-    Route::get('/addslide',[SlideController::class,'index']);
+
+   
     Route::get('/password/forgot',[ForgotController::class,'showForgotForm'])->name('forgot-password-form');
     Route::post('/password/verify',[ForgotController::class,'sendMail'])->name('send-mail');
     Route::post('/login/form',[ForgotController::class,'verifyCode'])->name('verify-code');
    
+
+    Route::get('/categories/add',[CategoryController::class,'create'])->name('add.category');
+    Route::post('/categories/store',[CategoryController::class,'store'])->name('store.category');
+    Route::get('/categories/{id}/edit',[CategoryController::class,'edit'])->name('edit.category');
+    Route::Patch('/categories/update/{id}',[CategoryController::class,'update'])->name('update.category');
+    Route::get('/categories/index',[CategoryController::class,'index'])->name('index.category');
+    Route::get('/categories/delete/{id}',[CategoryController::class,'delete'])->name('delete.category');
+
+    Route::get('/slides/index',[SlideController::class,'index'])->name('index.slide');
+    Route::post('/slides/{id}/destroy',[SlideController::class,'destroy'])->name('delete.slide');
+
 
 });
 Route::get('/', function () {
