@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\Auth\ForgotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,12 @@ Route::prefix('admin')->group(function (){
     Route::post('logout', [LoginController::class, 'Logout'])->name('admin-logout');
     Route::post('/register/owner', [RegisterController::class, 'Registertion'])->name('registertion');
 
+   
+    Route::get('/password/forgot',[ForgotController::class,'showForgotForm'])->name('forgot-password-form');
+    Route::post('/password/verify',[ForgotController::class,'sendMail'])->name('send-mail');
+    Route::post('/login/form',[ForgotController::class,'verifyCode'])->name('verify-code');
+   
+
     Route::get('/categories/add',[CategoryController::class,'create'])->name('add.category');
     Route::post('/categories/store',[CategoryController::class,'store'])->name('store.category');
     Route::get('/categories/{id}/edit',[CategoryController::class,'edit'])->name('edit.category');
@@ -35,13 +42,6 @@ Route::prefix('admin')->group(function (){
 
     Route::get('/slides/index',[SlideController::class,'index'])->name('index.slide');
     Route::post('/slides/{id}/destroy',[SlideController::class,'destroy'])->name('delete.slide');
-
-
-    Route::get('/password/forgot',[LoginController::class,'showForgotForm'])->name('forgot-password-form');
-    Route::get('/password/reset/{token}',[LoginController::class,'showResetForm'])->name('reset-password-form');
-    Route::post('/link/reset',[LoginController::class,'sendLink'])->name('send-link-reset');
-
-
 
 
 });
